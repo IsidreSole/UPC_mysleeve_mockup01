@@ -138,7 +138,7 @@ int main(void)
 
   /* Get module attention, in case banner hasn't finished  */
   esWifiTx((int8_t *)"\r");
-  HAL_UART_Receive_IT(&huart1, uint8_t *pData, uint16_t Size);   //  Aqui tindras que posar el buffer i una longitud de 1 caracter.
+  HAL_UART_Receive_IT(&huart1,tmp, 1);   //  Aqui tindras que posar el buffer i una longitud de 1 caracter.
   /* s'hem penjaaaa AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII*/
   esWifiParse((int8_t *)"");
 
