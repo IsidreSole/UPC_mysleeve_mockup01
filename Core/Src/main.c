@@ -47,6 +47,7 @@
 /* USER CODE END Includes */
 #include <stdint.h>
 #include <stdbool.h>
+#include <string,h>
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
