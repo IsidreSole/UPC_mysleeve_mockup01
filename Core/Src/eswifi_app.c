@@ -120,9 +120,11 @@ void dbgTx(int8_t * data)
  */
 void esWifiTx(int8_t * data)
 {
+	static HAL_StatusTypeDef ret = HAL_OK;
 	while (*data)
 	{
-		HAL_UART_Transmit(&huart1, (uint8_t *)data++, 1, 0xFFFF);
+		ret = HAL_UART_Transmit(&huart1, (uint8_t *)data++, 1, 0xFFFF);
+
 	}
 }
 

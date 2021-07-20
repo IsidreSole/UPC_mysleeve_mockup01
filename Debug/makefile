@@ -35,34 +35,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := WIFI_UPC
+BUILD_ARTIFACT_NAME := UPC_mysleeve_mockup01
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX := 
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME).$(BUILD_ARTIFACT_EXTENSION)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-WIFI_UPC.elf \
+UPC_mysleeve_mockup01.elf \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-WIFI_UPC.list \
+UPC_mysleeve_mockup01.list \
 
 OBJCOPY_BIN += \
-WIFI_UPC.bin \
+UPC_mysleeve_mockup01.bin \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: WIFI_UPC.elf secondary-outputs
+main-build: UPC_mysleeve_mockup01.elf secondary-outputs
 
 # Tool invocations
-WIFI_UPC.elf: $(OBJS) $(USER_OBJS) /Users/lauramartingallego/Desktop/ProyectoWiffi/WIFI_UPC/STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "WIFI_UPC.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/lauramartingallego/Desktop/ProyectoWiffi/WIFI_UPC/STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="WIFI_UPC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+UPC_mysleeve_mockup01.elf: $(OBJS) $(USER_OBJS) /home/isidre/workspace_2/UPC_mysleeve_mockup01/STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "UPC_mysleeve_mockup01.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/isidre/workspace_2/UPC_mysleeve_mockup01/STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="UPC_mysleeve_mockup01.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -71,13 +71,13 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-WIFI_UPC.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "WIFI_UPC.list"
+UPC_mysleeve_mockup01.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "UPC_mysleeve_mockup01.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-WIFI_UPC.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "WIFI_UPC.bin"
+UPC_mysleeve_mockup01.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "UPC_mysleeve_mockup01.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 
