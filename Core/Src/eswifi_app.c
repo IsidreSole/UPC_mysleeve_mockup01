@@ -151,16 +151,13 @@ int8_t esWifiRx(uint8_t *rxBuff, uint16_t timeOut)
 {
 	static uint8_t termCharDetect = 0;
 	static HAL_StatusTypeDef ret = HAL_OK;
-	char aux[32];
+	char aux;
 
 	/* read until time out */
-	do
-	{
-
-		ret = HAL_UART_Receive_IT(&huart1,aux, 1);   //  Aqui tindras que posar el buffer i una longitud de 1 caracter.
-
+//	do
+//	{
 		if (ret == HAL_OK){
-			esWiFiRxData.esWifiRxBuffer[esWiFiRxData.tail++] = aux;
+			esWiFiRxData.esWifiRxBuffer[esWiFiRxData.tail++] = *rxBuff;
 
 		}
 		/* check for serial data available */
@@ -204,11 +201,13 @@ int8_t esWifiRx(uint8_t *rxBuff, uint16_t timeOut)
 					termCharDetect = 0;
 					return SUCCESS;
 				}
-			}
+			}else{
+		        ret = HAL_UART_Receive_IT(&huart1,aux, 1);   //  Aqui tindras que posar el buffer i una longitud de 1 caracter.
+            }
 
 			return SUCCESS;
 		}
-	}while(timeOut--);
+//	}while(timeOut--);
 
 	return ESWIFI_FAIL;
 }
@@ -223,7 +222,7 @@ int8_t esWifiParse(int8_t *message)
 	uint16_t size;
 
 	memset(eswifi_app_buf.rxData,'\0', ESWIFI_APP_BUF_SIZE);
-	ret = HAL_UART_Receive_IT(&huart1,message, 8);   //  Aqui tindras que posar el buffer i una longitud de 1 caracter.
+	ret = HAL_UART_Receive_IT(&huart1,message, 8);   
 	while(!esWifiRxFlag)
         HAL_Delay(10);
 
