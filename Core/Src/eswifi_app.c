@@ -121,11 +121,9 @@ void dbgTx(int8_t * data)
 void esWifiTx(int8_t * data)
 {
 	static HAL_StatusTypeDef ret = HAL_OK;
-	while (*data)
-	{
-		ret = HAL_UART_Transmit(&huart1, (uint8_t *)data++, 1, 0xFFFF);
 
-	}
+		ret = HAL_UART_Transmit(&huart1, (uint8_t *) data , 1, 0xFFFF);
+
 }
 
 /*
@@ -152,10 +150,19 @@ void esWifiFlushBuff(void)
 int8_t esWifiRx(uint8_t *rxBuff, uint16_t timeOut)
 {
 	static uint8_t termCharDetect = 0;
+	static HAL_StatusTypeDef ret = HAL_OK;
+	char aux[32];
 
 	/* read until time out */
 	do
 	{
+
+		ret = HAL_UART_Receive_IT(&huart1,aux, 1);   //  Aqui tindras que posar el buffer i una longitud de 1 caracter.
+
+		if (ret == HAL_OK){
+			esWiFiRxData.esWifiRxBuffer[esWiFiRxData.tail++] = aux;
+
+		}
 		/* check for serial data available */
 		if(esWiFiRxData.head != esWiFiRxData.tail)
 		{
@@ -198,6 +205,7 @@ int8_t esWifiRx(uint8_t *rxBuff, uint16_t timeOut)
 					return SUCCESS;
 				}
 			}
+
 			return SUCCESS;
 		}
 	}while(timeOut--);

@@ -43,6 +43,7 @@
 #define A0SSID				"MIWIFI_2G_Qbcj"
 #endif
 
+extern struct esWifiCircularBuffer esWiFiRxData;
 
 /* USER CODE END Includes */
 
@@ -138,9 +139,13 @@ int main(void)
 
   /* Get module attention, in case banner hasn't finished  */
   esWifiTx((int8_t *)"\r");
-  HAL_UART_Receive_IT(&huart1,tmp, 1);   //  Aqui tindras que posar el buffer i una longitud de 1 caracter.
-  /* s'hem penjaaaa AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII*/
+
+
+
+
+  //s'hem penjaaaa AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII*/
   esWifiParse((int8_t *)"");
+
 
   /* Start */
   dbgTx((int8_t *)"\r\nApplication Starting\r\n");  /* Application Start */

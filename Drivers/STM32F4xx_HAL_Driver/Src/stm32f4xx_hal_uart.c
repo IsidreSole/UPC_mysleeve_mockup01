@@ -255,6 +255,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
+#include "eswifi_app.h"
 
 /** @addtogroup STM32F4xx_HAL_Driver
   * @{
@@ -301,6 +302,8 @@ static HAL_StatusTypeDef UART_EndTransmit_IT(UART_HandleTypeDef *huart);
 static HAL_StatusTypeDef UART_Receive_IT(UART_HandleTypeDef *huart);
 static HAL_StatusTypeDef UART_WaitOnFlagUntilTimeout(UART_HandleTypeDef *huart, uint32_t Flag, FlagStatus Status, uint32_t Tickstart, uint32_t Timeout);
 static void UART_SetConfig(UART_HandleTypeDef *huart);
+
+extern struct esWifiCircularBuffer esWiFiRxData;
 
 /**
   * @}
@@ -2580,10 +2583,16 @@ void HAL_UART_IRQHandler(UART_HandleTypeDef *huart)
   *                the configuration information for the specified UART module.
   * @retval None
   */
-__weak void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
   /* Prevent unused argument(s) compilation warning */
-  UNUSED(huart);
+	esWiFiRxData.esWifiRxBuffer[esWiFiRxData.tail++] = (uint8_t )(huart->Instance->DR & (uint8_t)0x00FFU);
+
+		  /* check for eS-Wifi RX buffer wrap */
+	if (esWiFiRxData.tail >=  ESWIFI_UART_RX_BUFFSIZE){
+			/* eS-WiFi RX buffer wrap so, reset buffer pointer to top of buffer */
+			esWiFiRxData.tail = 0;
+	}
   /* NOTE: This function should not be modified, when the callback is needed,
            the HAL_UART_TxCpltCallback could be implemented in the user file
    */

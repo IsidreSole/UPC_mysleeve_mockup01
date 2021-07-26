@@ -1,6 +1,6 @@
 eswifi_app.c:110:6:dbgTx	16	static
 eswifi_app.c:121:6:esWifiTx	16	static
-eswifi_app.c:134:6:esWifiFlushUart	4	static
-eswifi_app.c:143:6:esWifiFlushBuff	8	static
-eswifi_app.c:152:8:esWifiRx	16	static
-eswifi_app.c:211:8:esWifiParse	24	static
+eswifi_app.c:132:6:esWifiFlushUart	4	static
+eswifi_app.c:141:6:esWifiFlushBuff	8	static
+eswifi_app.c:150:8:esWifiRx	48	static
+eswifi_app.c:219:8:esWifiParse	24	static
