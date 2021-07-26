@@ -222,7 +222,7 @@ int8_t esWifiParse(int8_t *message)
 	uint16_t size;
 
 	memset(eswifi_app_buf.rxData,'\0', ESWIFI_APP_BUF_SIZE);
-	ret = HAL_UART_Receive_IT(&huart1,message, 8);   
+	ret = HAL_UART_Receive_IT(&huart1,rxBuffDummy, 1);   
 	while(!esWifiRxFlag)
         HAL_Delay(10);
 
