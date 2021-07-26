@@ -222,11 +222,9 @@ int8_t esWifiParse(int8_t *message)
 	uint16_t size;
 
 	memset(eswifi_app_buf.rxData,'\0', ESWIFI_APP_BUF_SIZE);
+	ret = HAL_UART_Receive_IT(&huart1,aux, 1);   //  Aqui tindras que posar el buffer i una longitud de 1 caracter.
 	while(!esWifiRxFlag)
-	{
-		if (esWifiRx(&rxBuffDummy, 0xffff) == ESWIFI_TIMEOUT)
-			break;
-	}
+        HAL_Delay(10);
 
 	if (esWifiRxFlag)
 	{
